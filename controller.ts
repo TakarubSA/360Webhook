@@ -8,12 +8,13 @@ export const receiveWebhook = (req: Request, res: Response) => {
     body: req.body,
   });
 
-  // Keep only the latest 100
   if (webhooks.length > 100) {
     webhooks.pop();
   }
 
-  res.sendStatus(200);
+  res.status(200).json({
+    success: true,
+  });
 };
 
 export const listWebhooks = (_: Request, res: Response) => {
