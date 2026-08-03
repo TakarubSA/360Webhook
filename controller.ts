@@ -1,16 +1,21 @@
 import { Request, Response } from "express";
 
-export const receiveWebhook = (
-  req: Request,
-  res: Response
-) => {
-  const { integrationId, token } = req.params;
+const webhooks: any[] = [];
 
-  console.log({
-    integrationId,
-    token,
+export const receiveWebhook = (req: Request, res: Response) => {
+  webhooks.unshift({
+    receivedAt: new Date().toISOString(),
     body: req.body,
   });
 
+  // Keep only the latest 100
+  if (webhooks.length > 100) {
+    webhooks.pop();
+  }
+
   res.sendStatus(200);
+};
+
+export const listWebhooks = (_: Request, res: Response) => {
+  res.json(webhooks);
 };
