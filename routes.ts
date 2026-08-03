@@ -10,4 +10,11 @@ router.post(
 
 router.get("/hooks", listWebhooks);
 
+router.get("/", (_, res) => {
+  res.json({
+    service: "360 Webhook",
+    status: "ok",
+  });
+});
+
 export default router;
