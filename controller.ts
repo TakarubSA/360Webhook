@@ -12,9 +12,9 @@ export const receiveWebhook = (req: Request, res: Response) => {
     webhooks.pop();
   }
 
-  res.status(200).json({
-    success: true,
-  });
+res.status(200).json({
+  received: true,
+});
 };
 
 export const listWebhooks = (_: Request, res: Response) => {
